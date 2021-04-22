@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'','Registration form')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<body>
+<div class="row" style="margin-top: 50px";>
+    <div class="col-lg-3 text-center"></div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header text-center">
+                <th:block th:if="${account_type =='student_grad'}">Register new Grad Student Account</th:block>
+                <th:block th:if="${account_type =='student_undergrad'}">Register new Undergrad Student Account</th:block>
+                <th:block th:if="${account_type =='instructor'}">Register new Instructor Account</th:block>
+            </div>
+
+            <form th:action="@{${registerAction}}" th:object="${user}" method="POST">
+
+                <div th:if="${registrationError != null}" class="alert alert-danger">
+                    <p th:text="${registrationError}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="userName">Username</label>
+
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('userName') ? 'is-invalid' :''}" th:field="*{userName}" placeholder="amanbatra">
+                    <div th:if="${#fields.hasErrors('userName')}" class="invalid-feedback">
+                        <p th:errors="*{userName}"></p>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" th:classappend="${#fields.hasErrors('password') ? 'is-invalid' :''}" th:field="*{password}" placeholder="password">
+                    <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback">
+                        <p th:errors="*{password}"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="matchingPassword">Repeat</label>
+                    <input type="password" class="form-control" th:classappend="${#fields.hasErrors('matchingPassword') ? 'is-invalid' :''}" th:field="*{matchingPassword}"
+                           placeholder="Repeat password">
+                    <div th:if="${#fields.hasErrors('matchingPassword')}" class="invalid-feedback">
+                        <p th:errors="*{matchingPassword}"></p>
+                    </div>
+
+                </div>
+
+                <th:block th:if="${account_type =='student_grad'}">
+                    <div class="form-group">
+                        <label for="univName">University Name</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('univName') ? 'is-invalid' :''}" th:field="*{univName}"
+                               placeholder="University name">
+                        <div th:if="${#fields.hasErrors('univName')}" class="invalid-feedback">
+                            <p th:errors="*{univName}"></p>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cidNumber">College ID</label>
+
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('cidNumber') ? 'is-invalid' :''}" th:field="*{cidNumber}"
+                               placeholder="College Id Number">
+                        <div th:if="${#fields.hasErrors('cidNumber')}" class="invalid-feedback">
+                            <p th:errors="*{cidNumber}"></p>
+                        </div>
+
+                    </div>
+
+                </th:block>
+
+                <div class="form-group">
+                    <label th:if="${account_type =='student_grad'}" for="firstName">Contact person first
+                        name</label>
+                    <label th:if="${account_type =='student_undergrad' or account_type =='instructor'}"
+                           for="firstName">First
+                        name</label>
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('firstName') ? 'is-invalid' :''}" th:field="*{firstName}"  placeholder="Aman">
+                    <div th:if="${#fields.hasErrors('firstName')}" class="invalid-feedback">
+                        <p th:errors="*{firstName}"></p>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label th:if="${account_type =='student_grad'}" for="lastName">Contact person last
+                        name</label>
+                    <label th:if="${account_type =='student_undergrad' or account_type =='instructor'}"
+                           for="lastName">Last
+                        name</label>
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' :''}" th:field="*{lastName}" placeholder="Batra">
+                    <div th:if="${#fields.hasErrors('lastName')}" class="invalid-feedback">
+                        <p th:errors="*{lastName}"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('email') ? 'is-invalid' :''}" th:field="*{email}" placeholder="aman@batra.me">
+                    <div th:if="${#fields.hasErrors('email')}" class="invalid-feedback">
+                        <p th:errors="*{email}"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">mobile</label>
+
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('mobile') ? 'is-invalid' :''}" th:field="*{mobile}"
+                           placeholder="8571234567">
+                    <div th:if="${#fields.hasErrors('mobile')}" class="invalid-feedback">
+                        <p th:errors="*{mobile}"></p>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="street">street</label>
+
+                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('street') ? 'is-invalid' :''}" th:field="*{street}" placeholder="334 Huntington Ave">
+                    <div th:if="${#fields.hasErrors('street')}" class="invalid-feedback">
+                        <p th:errors="*{street}"></p>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="postcode">Postal code</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('postcode') ? 'is-invalid' :''}" th:field="*{postcode}" placeholder="02115">
+                        <div th:if="${#fields.hasErrors('postcode')}" class="invalid-feedback">
+                            <p th:errors="*{postcode}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('city') ? 'is-invalid' :''}" th:field="*{city}" placeholder="Boston">
+                        <div th:if="${#fields.hasErrors('city')}" class="invalid-feedback">
+                            <p th:errors="*{city}"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <th:block th:if="${account_type =='instructor'}">
+                    <div class="form-group">
+                        <p class="text-primary">Undergrad Student target</p>
+                        <p class="text-info">Grad Student target</p>
+                        <label>Courses:</label>
+                        <ul>
+                            <li th:each="course : ${allCourses}">
+                                <input type="checkbox" th:field="*{courses}" th:value="${course.id}" />
+                                <label th:for="${#ids.prev('courses')}"
+                                       th:text="${course.name}" th:classappend="${course.targetStudent=='undergrad'} ? text-primary : text-info">CS3200</label>
+                            </li>
+                        </ul>
+                    </div>
+                </th:block>
+
+                <button type="submit" class="btn btn-success">Register</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 text-center"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'instructors','Available instructors')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+
+
+<div class="row align-items-center justify-content-center" style="margin-top: 50px">
+    <div>
+        <table id="instructors" class="table table-striped text-center">
+            <thead class="thead-dark">
+            <tr>
+                <th> Name</th>
+                <th> E-mail</th>
+                <th> Meetings</th>
+                <th> Courses</th>
+                <th> Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${instructors == null}">
+                <td colspan="4"> No Instructors Available</td>
+            </tr>
+            <tr th:each="instructor : ${instructors}">
+                <td><span th:text="${instructor.firstName +' ' + instructor.lastName}"> Name Lastname </span></td>
+                <td><span th:text="${instructor.email }"> email </span></td>
+                <td><span th:text="${instructor.meetings.size() }"> 3 </span></td>
+                <td><span th:text="${instructor.courses.size() }"> 2 </span></td>
+                <td><a class="btn btn-secondary" th:href="@{'/instructors/' + ${instructor.id}}" role="button">Details</a>
+                    <form class="d-inline-block" th:action="@{/instructors/delete}" method="POST">
+                        <input type="hidden" name="instructorId" th:value="${instructor.id}"/>
+                        <button type="submit" name="submit" value="value" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div class="row align-items-center justify-content-center" style="margin-top: 50px">
+    <a class="btn btn-primary" th:href="@{/instructors/new}" role="button">New instructor</a>
+</div>
+
+
+</body>
+</html>

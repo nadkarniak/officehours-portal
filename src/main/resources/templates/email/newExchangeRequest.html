@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+<p>Hello, <span th:text="${newMeeting.getStudent().getFirstName()}"></span></p>
+<p>Someone want's to exchange his meeting with your meeting. </p>
+<p>You meeting date is: <span th:text="${#temporals.format(newMeeting.start, 'dd-MM-yyyy HH:mm')}"></span></p>
+<p>His/Her meeting date is: <span th:text="${#temporals.format(oldMeeting.start, 'dd-MM-yyyy HH:mm')}"></span></p>
+
+<p>Click <a th:href="${url}">here</a> to view it and take action.</p>
+
+</body>
+</html>

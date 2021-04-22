@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'','Select service')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<body>
+<div class="row align-items-center justify-content-center d-block" style="margin-top: 50px">
+    <div class="row align-items-center justify-content-center" style="margin-top: 50px">
+        <div>
+            <table id="students" class="table table-striped text-center">
+                <thead class="thead-dark">
+                <tr>
+                    <th> Name</th>
+                    <th> Duration</th>
+                    <th> Credits</th>
+                    <th> Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${courses == null}">
+                    <td colspan="4"> No courses available</td>
+                </tr>
+                <tr th:each="course : ${courses}">
+                    <td><span th:text="${course.name}"> Course name </span></td>
+                    <td><span th:text="${course.duration }"> 4 Months </span></td>
+                    <td><span th:text="${course.credits}"> 4 </span></td>
+                    <td><a class="btn btn-primary"
+                           th:href="@{'/meetings/new/'+${instructorId} +'/'+ ${course.id}}"
+                           role="button">Select</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+</body>
+
+</html>

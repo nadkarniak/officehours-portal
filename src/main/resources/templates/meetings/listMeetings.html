@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      th:replace="~{fragments/layout :: layout (~{::body},'meetings','Student meetings')}">
+
+<body>
+
+<!-- Page Content -->
+<div class="row align-items-center justify-content-center" style="margin-top: 50px">
+    <div th:fragment="studentMeetings">
+
+
+        <table id="meetings" class="table text-center">
+            <thead class="thead-dark">
+            <tr>
+                <th> Course</th>
+                <th> Status</th>
+                <th> Start</th>
+                <th sec:authorize="!hasRole('ROLE_INSTRUCTOR')"> Instructor</th>
+                <th sec:authorize="!hasRole('ROLE_STUDENT')"> Student</th>
+                <th> Duration</th>
+                <th> Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${meetings == null}">
+                <td colspan="2"> No Meetings Available</td>
+            </tr>
+            <tr th:each="meeting : ${meetings}"
+                th:classappend="${meeting.status.name() == 'CANCELED' || meeting.status.name()  == 'FINISHED' || meeting.status.name()  == 'READED' || meeting.status.name()  == 'REJECTION_REQUESTED' || meeting.status.name()  == 'REJECTED'} ? table-secondary : table-success">
+                <td><span th:text="${meeting.course.name}"> Work </span></td>
+                <td><span th:text="${meeting.status}"> scheduled </span></td>
+                <td><span th:text="${#temporals.format(meeting.start, 'yyyy-MM-dd HH:mm')}"> 21-01-2019 15:00</span>
+                </td>
+                <td sec:authorize="!hasRole('ROLE_INSTRUCTOR')"><span
+                        th:text="${meeting.instructor.firstName + ' ' + meeting.instructor.lastName}">
+                                Instructor </span>
+                </td>
+                <td sec:authorize="!hasRole('ROLE_STUDENT')"><span
+                        th:text="${meeting.student.firstName + ' ' + meeting.student.lastName}">
+                                Student </span>
+                </td>
+                <td><span th:text="${meeting.course.duration + ' min'}"> 60 min </span></td>
+                <td><a class="btn btn-secondary" th:href="@{'/meetings/' + ${meeting.id}}"
+                       role="button">Details</a></td>
+            </tr>
+            </tbody>
+            <tfoot class="text-primary">
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th  sec:authorize="hasRole('ROLE_ADMIN')"></th>
+            </tr>
+            </tfoot>
+        </table>
+        <div sec:authorize="hasRole('ROLE_STUDENT')" class="text-center">
+            <a class="btn btn-primary mt-2" th:href="@{/templates/meetings/new}" role="button">New meeting</a>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#meetings').DataTable({
+                "dom": '<"toolbar">lrtip',
+                "bFilter": true,
+                "bLengthChange": false,
+                "order": [
+                    [2, "asc"]
+                ],
+                "initComplete": function () {
+                    this.api().columns([1]).every(function () {
+                        $("div.toolbar").html('<div id="my_filter" style="margin-bottom: 10px">Status filter: </div>');
+                        var column = this;
+                        column.search('^SCHEDULED$', true, false).draw();
+                        var select = $('<select name="statuses"><option value="SCHEDULED">SCHEDULED</option></select>')
+                            .appendTo('#my_filter')
+                            .on('change', function () {
+                                var searchString = $(this).val();
+                                searchString = searchString.replace('<span>', '');
+                                searchString = searchString.replace('</span>', '');
+                                var val = $.fn.dataTable.util.escapeRegex(searchString);
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                            });
+                        statuses.forEach(function (d) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            });
+        });
+
+        var statuses = [
+            'FINISHED',
+            'CONFIRMED',
+            'READED',
+            'CANCELED',
+            'DENIED',
+            'REJECTION_REQUESTED',
+            'REJECTED',
+            'EXCHANGE_REQUESTED'];
+    </script>
+</div>
+
+
+</body>
+
+
+</html>

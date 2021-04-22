@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'reports','Available reports')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<body>
+
+
+<div class="row align-items-center justify-content-center" style="margin-top: 50px">
+
+
+    <div>
+        <table id="instructors" class="table table-striped text-center mt-2">
+
+            <thead class="thead-dark">
+
+            <tr >
+                <th> Number</th>
+                <th> Issued</th>
+                <th> Status</th>
+                <th> Total price</th>
+                <th> Customer</th>
+                <th> Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${reports == null}">
+                <td colspan="4"> No Invoices Available</td>
+            </tr>
+            <tr th:each="report : ${reports}">
+                <td><span th:text="${report.number}"> FV/2019/02/03 </span></td>
+                <td><span th:text="${#temporals.format(report.issued, 'dd-MM-yyyy HH:mm')}"> 15-03-2019 15:00 </span>
+                </td>
+                <td><span th:text="${report.status}"> paid </span></td>
+                <td><span th:text="${report.totalAmount +' PLN'}"> 60.00 PLN</span></td>
+                <td><span th:text="${report.appointments[0].customer.firstName + ' '+report.appointments[0].customer.lastName}">Jan Kowalski</span></td>
+                <td>
+                    <a class="btn btn-secondary" th:href="@{'/reports/download/' + ${report.id}}" role="button">Download</a>
+                    <form th:if="${report.status=='issued'}" class="d-inline-block"
+                          th:action="@{'/reports/paid/' + ${report.id}}" method="POST">
+                        <input type="hidden" name="invoiceId" th:value="${report.id}"/>
+                        <button type="submit" name="submit" value="value" class="btn btn-success">Mark as paid</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div class="row align-items-center justify-content-center">
+    <a style="margin-bottom: 5px"  th:href="@{/reports/issue}" class="btn btn-success" role="button" aria-pressed="true">Issue reports manually</a>
+</div>
+</body>
+</html>

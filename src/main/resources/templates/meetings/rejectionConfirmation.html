@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'meetings','Meeting rejection')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<body>
+
+<!-- Page Content -->
+<div class="row align-items-center justify-content-center" style="margin-top: 50px">
+<div th:if="${type == 'request'}">
+    <div th:if="${result}">
+        <p>You successfully requested rejection for this meeting. </p>
+        <p>If instructor will confirm that it will be not reported.</p>
+    </div>
+
+    <div th:if="${result==false}">
+        <p>Error occurred!</p>
+        <p>Make sure that this meetings isn't already rejected</p>
+    </div>
+
+</div>
+
+<div  th:if="${type == 'accept'}">
+    <div th:if="${result}">
+        <p>Appointment status has been successfully set to rejected </p>
+        <p>It will be not reported.</p>
+    </div>
+
+    <div th:if="${result==false}">
+        <p>Error occurred!</p>
+        <p>Make sure that this meetings isn't already rejected</p>
+    </div>
+
+</div>
+
+<div sec:authorize="!isAuthenticated()">
+    <p>You can sign in <a th:href="@{/login}">here</a></p>
+</div>
+</div>
+</div>
+
+</body>
+
+</html>

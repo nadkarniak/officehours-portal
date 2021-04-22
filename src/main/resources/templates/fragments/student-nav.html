@@ -1,0 +1,15 @@
+<th:block th:fragment="navlinks(activeLink)">
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item " th:classappend="${activeLink} == 'home' ? 'active':''">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item" th:classappend="${activeLink} == 'meetings' ? 'active':''">
+                <a class="nav-link" th:href="@{/meetings/all}">Meetings</a>
+            </li>
+            <li class="nav-item" th:classappend="${activeLink} == 'account' ? 'active':''">
+                <a class="nav-link" th:href="@{'/students/' + ${#authentication.principal.id}}">My Profile</a>
+            </li>
+        </ul>
+    </div>
+</th:block>

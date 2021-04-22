@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+<p>Hello, <span th:text="${meeting.student.firstName}"></span></p>
+<p>You instructor confirmed that this appointment didn't take place: </p>
+<p>Start date: <span th:text="${#temporals.format(meeting.start, 'dd-MM-yyyy HH:mm')}"></span></p>
+<p>Course: <span th:text="${meeting.course.name}"></span></p>
+<p>Duration: <span th:text="${meeting.course.duration}"></span></p>
+<p>Price: <span th:text="${meeting.course.credits}"></span></p>
+
+<p><strong>It's status is set to rejected and it will be not reported.</strong></p>
+
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<html>
+
+<head>
+
+    <style>
+        .report-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        .report-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+        .report-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .report-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+
+        .report-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .report-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        .report-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        .report-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .report-box table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        .report-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .report-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .report-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .report-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .report-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .rtl table {
+            text-align: right;
+        }
+
+        .rtl table tr td:nth-child(2) {
+            text-align: left;
+        }
+
+        #number {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="report-box">
+    <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td class="title">
+                            <img src="/img/logo.jpg" style="width:100%; max-width:300px;" />
+                        </td>
+
+                        <td>
+                            <span th:text="${report.number}" id="number">FV/2019/03/42</span><br />
+                            Issued: <span th:text="${#temporals.format(report.issued, 'dd-MM-yyyy')}">Issued: 01-03-2019</span><br/>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="information">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            <b>From:</b><br/>
+                            Prof AB<br/>
+                            389 West Village Z<br/>
+                            02115 Boston<br/>
+                            706-425-256 <br/>
+                            PL 76 9584 1034 3528 6132 8140 7826
+
+                        </td>
+
+                        <td>
+                            <b>To:</b><br/>
+                            <span th:if="${report.meetings[0].student.hasRole('ROLE_STUDENT_UNDERGRAD')}" th:utext="${report.meetings[0].student.firstName +' '+report.meetings[0].student.lastName}+ '&lt;br /&gt;'">Anirudh P</span>
+                            <span th:if="${report.meetings[0].student.hasRole('ROLE_STUDENT_GRAD')}" th:utext="${report.meetings[0].student.univName} +'&lt;br /&gt;'">University Name</span>
+                            <span th:if="${report.meetings[0].student.hasRole('ROLE_STUDENT_GRAD')}" th:utext="${'ID: ' + report.meetings[0].student.cidNumber}+'&lt;br /&gt;'">ID: 697-134-42-81</span>
+                            <span th:text="${report.meetings[0].student.street}">331 huntington ave</span><br/>
+                            <span th:text="${report.meetings[0].student.postcode + ' ' + report.meetings[0].student.city}">02115 Boston</span><br/>
+                            <span th:text="${report.meetings[0].student.mobile}">111-222-3333</span><br/>
+                            <span th:text="${report.meetings[0].student.email}">email@example.com</span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="heading">
+            <td>
+                Item
+            </td>
+
+            <td>
+                Price
+            </td>
+        </tr>
+
+        <tr th:each="meeting : ${report.meetings}" class="item">
+            <td>
+                <span th:text="${meeting.course.name +' with '+meeting.instructor.firstName +' '+meeting.instructor.lastName +' on '+#temporals.format(meeting.start, 'dd-MM-yyyy HH:mm')}"></span>
+            </td>
+
+            <td>
+                <span th:text="${meeting.course.credits}">4</span>
+            </td>
+        </tr>
+
+        <tr class="total">
+            <td></td>
+
+            <td>
+                Total: <span th:text="${report.totalCredits}">16</span>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

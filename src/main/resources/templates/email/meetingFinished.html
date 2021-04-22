@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+<p>Hello, <span th:text="${meeting.student.firstName}"></span></p>
+<p>This is your finished meeting summary:</p>
+<p>Date: <span th:text="${#temporals.format(meeting.start, 'dd-MM-yyyy HH:mm')}"></span></p>
+<p>Instructor: <span th:text="${meeting.instructor.firstName}"></span></p>
+<p>Course: <span th:text="${meeting.course.name}"></span></p>
+<p>Duration: <span th:text="${meeting.course.duration}"></span></p>
+<p>Price: <span th:text="${meeting.course.credits}"></span></p>
+<p>If by some reason this meeting didn't take place, you have 24h to report this by clicking <a th:href="${url}">here</a></p>
+
+</body>
+
+</html>
