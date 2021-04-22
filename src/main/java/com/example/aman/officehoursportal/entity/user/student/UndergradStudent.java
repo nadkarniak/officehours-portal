@@ -1,7 +1,6 @@
 package com.example.aman.officehoursportal.entity.user.student;
 
 import com.example.aman.officehoursportal.entity.user.Role;
-import com.example.aman.officehoursportal.entity.user.student.Student;
 import com.example.aman.officehoursportal.model.UserForm;
 
 import javax.persistence.Entity;

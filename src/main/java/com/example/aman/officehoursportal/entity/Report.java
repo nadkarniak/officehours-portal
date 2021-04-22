@@ -83,7 +83,7 @@ public class Report extends BaseEntity {
         return meetings;
     }
 
-    public void setAppointments(List<Meeting> meetings) {
+    public void setMeetings(List<Meeting> meetings) {
         this.meetings = meetings;
     }
 }

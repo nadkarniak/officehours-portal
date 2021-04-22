@@ -32,7 +32,7 @@
                 <td><span th:text="${course.duration +' min'}"> 30 min </span></td>
                 <td><span th:text="${course.instructors.size()}"> 2 </span></td>
                 <td><a class="btn btn-secondary" th:href="@{'/courses/' + ${course.id}}" role="button">Details</a>
-                    <form class="d-inline-block" th:action="@{/templates/courses/delete}" method="POST">
+                    <form class="d-inline-block" th:action="@{/courses/delete}" method="POST">
                         <input type="hidden" name="courseId" th:value="${course.id}" />
                         <button type="submit" name="submit" value="value" class="btn btn-danger">Delete</button>
                     </form>
@@ -44,7 +44,7 @@
 
 </div>
 <div class="row align-items-center justify-content-center" style="margin-top: 50px">
-    <a class="btn btn-primary" th:href="@{/templates/courses/new}" role="button">New Course</a>
+    <a class="btn btn-primary" th:href="@{/courses/new}" role="button">New Course</a>
 </div>
 
 

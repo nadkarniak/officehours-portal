@@ -99,7 +99,7 @@ public class EmailServiceImpl implements EmailService {
         Context context = new Context();
         context.setVariable("meeting", meeting);
         context.setVariable("canceler", "student");
-        sendEmail(meeting.getInstructor().getEmail(), "Meeting canceled by Student", "appointmentCanceled", context, null);
+        sendEmail(meeting.getInstructor().getEmail(), "Meeting canceled by Student", "meetingCanceled", context, null);
     }
 
     @Async

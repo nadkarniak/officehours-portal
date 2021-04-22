@@ -141,7 +141,7 @@ public class MeetingController {
     }
 
     @GetMapping("/new/{instructorId}/{courseId}/{dateTime}")
-    public String showNewAppointmentSummary(@PathVariable("courseId") int courseId, @PathVariable("instructorId") int instructorId, @PathVariable("dateTime") String start, Model model, @AuthenticationPrincipal CustomUserDetails currentUser) {
+    public String showNewMeetingSummary(@PathVariable("courseId") int courseId, @PathVariable("instructorId") int instructorId, @PathVariable("dateTime") String start, Model model, @AuthenticationPrincipal CustomUserDetails currentUser) {
         if (meetingService.isAvailable(courseId, instructorId, currentUser.getId(), LocalDateTime.parse(start))) {
             model.addAttribute("course", courseService.getCourseById(courseId));
             model.addAttribute("instructor", userService.getInstructorById(instructorId).getFirstName() + " " + userService.getInstructorById(instructorId).getLastName());

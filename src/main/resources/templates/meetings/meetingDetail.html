@@ -11,7 +11,7 @@
             <div class="col-md-1">
             </div>
             <div th:if="${meeting.exchangeRequest !=null && meeting.exchangeRequest.getStatus().name()== 'PENDING'}" class="col-md-9 p-3 mb-2 bg-warning text-dark text-center">
-                <p>Someone requested this appointment to be exchanged.</p>
+                <p>Someone requested this meeting to be exchanged.</p>
 
                 <form th:action="@{/exchange/reject}" method='POST'>
                     <input type="hidden" name="exchangeId" th:value="${meeting.exchangeRequest.id}">
@@ -24,11 +24,11 @@
             </div>
             <div th:if="${allowedToRequestRejection}" class="col-md-9 p-3 mb-2 bg-warning text-dark text-center">
                 <p>You have <span class="font-weight-bold" th:text="${remainingTime}">3h 45m</span> to deny that
-                    this appointment took place.</p>
-                <p>After that time it will be invoiced automatically.</p>
+                    this meeting took place.</p>
+                <p>After that time it will be reported automatically.</p>
 
-                <form th:action="@{/templates/meetings/reject}" method='POST'>
-                    <input type="hidden" name="appointmentId" th:value="${meeting.id}">
+                <form th:action="@{/meetings/reject}" method='POST'>
+                    <input type="hidden" name="meetingId" th:value="${meeting.id}">
                     <input type="submit" class="btn btn-danger" value="Reject" />
                 </form>
             </div>
@@ -36,7 +36,7 @@
                 <p>Student claims that this meeting didn't take place.</p>
                 <p>If you agree with that, click the button below:</p>
 
-                <form th:action="@{/templates/meetings/acceptRejection}" method='POST'>
+                <form th:action="@{/meetings/acceptRejection}" method='POST'>
                     <input type="hidden" name="meetingId" th:value="${meeting.id}">
                     <input type="submit" class="btn btn-danger" value="Accept" /></form>
             </div>
@@ -96,7 +96,7 @@
                         <td><b>Credits</b></td>
                         <td><span th:text="${meeting.course.credits}"> 50 </span> pln</td>
                     </tr>
-                    <tr th:if="${meeting.status.name()=='INVOICED'}">
+                    <tr th:if="${meeting.status.name()=='READED'}">
                         <td><b>report</b></td>
                         <td><a th:href="@{'/reports/download/'+${meeting.report.id}}">download</a></td>
                     </tr>
@@ -114,7 +114,7 @@
                     <tr>
                         <td><b>cancellation</b></td>
                         <td th:if="${allowedToCancel}">
-                            <form th:action="@{/templates/meetings/cancel}" method='POST'>
+                            <form th:action="@{/meetings/cancel}" method='POST'>
                                 <input type="hidden" name="meetingId" th:value="${meeting.id}">
                                 <input type="submit" class="btn btn-danger" value="Cancel" />
                             </form>
@@ -134,7 +134,7 @@
                         <div class="panel-heading top-bar">
                             <div class="col-md-8 col-xs-8">
                                 <p>
-                                    Appointment chat with
+                                    Meeting chat with
                                     <span sec:authorize="hasRole('ROLE_INSTRUCTOR')" th:text="${meeting.student.firstName}"></span>
                                     <span sec:authorize="hasRole('ROLE_STUDENT')" th:text="${meeting.instructor.firstName}"></span>
                                 </p>
@@ -154,7 +154,7 @@
                             </div>
                         </div>
 
-                        <form th:action="@{/templates/meetings/messages/new}" th:object="${chatMessage}" method='POST'>
+                        <form th:action="@{/meetings/messages/new}" th:object="${chatMessage}" method='POST'>
                             <div class="input-group mb-3">
                                 <input type="hidden" name="meetingId" th:value="${meeting.id}">
                                 <input type="text" class="form-control" th:field="*{message}" placeholder="Write your message here..." aria-label="Recipient's username" aria-describedby="basic-addon2">

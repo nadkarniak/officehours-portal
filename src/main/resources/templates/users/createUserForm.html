@@ -3,7 +3,7 @@
       xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <body>
-<div class="row" style="margin-top: 50px";>
+<div class="row" style="margin-top: 50px">
     <div class="col-lg-3 text-center"></div>
     <div class="col-lg-6">
         <div class="card">
@@ -151,20 +151,17 @@
                             <li th:each="course : ${allCourses}">
                                 <input type="checkbox" th:field="*{courses}" th:value="${course.id}" />
                                 <label th:for="${#ids.prev('courses')}"
-                                       th:text="${course.name}" th:classappend="${course.targetStudent=='undergrad'} ? text-primary : text-info">CS3200</label>
+                                       th:text="${course.name}" th:classappend="${course.targetStudent=='undergrad'}? text-primary : text-info">CS3200</label>
                             </li>
                         </ul>
                     </div>
                 </th:block>
 
                 <button type="submit" class="btn btn-success">Register</button>
-
-
             </form>
         </div>
     </div>
 </div>
 <div class="col-lg-3 text-center"></div>
-</div>
 </body>
 </html>

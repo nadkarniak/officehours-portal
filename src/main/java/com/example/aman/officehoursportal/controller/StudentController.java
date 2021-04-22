@@ -80,7 +80,7 @@ public class StudentController {
             redirectAttributes.addFlashAttribute("user", user);
             return "redirect:/students/" + user.getId();
         }
-        userService.updateGradStudentProfile(user);
+        userService.updateUndergradStudentProfile(user);
         return "redirect:/students/" + user.getId();
     }
 
@@ -112,7 +112,7 @@ public class StudentController {
         }
         userService.saveNewUndergradStudent(userForm);
         model.addAttribute("createdUserName", userForm.getUserName());
-        return "users/login";
+        return "users/successful";
     }
 
     @PostMapping("/new/grad")
@@ -123,7 +123,7 @@ public class StudentController {
         }
         userService.saveNewGradStudent(userForm);
         model.addAttribute("createdUserName", userForm.getUserName());
-        return "users/login";
+        return "users/successful";
     }
 
 

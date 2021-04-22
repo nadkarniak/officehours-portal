@@ -15,7 +15,7 @@
                  alt="avatar">
 
         </div>
-        </hr><br>
+        <br>
 
 
         <div class="card text-center">
@@ -48,7 +48,7 @@
                 <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                    aria-controls="profile" aria-selected="true">Profile</a>
             </li>
-            <li sec:authorize="hasRole('ROLE_INSTRUCTORS') or hasRole('ROLE_STUDENTS')" class="nav-item">
+            <li sec:authorize="hasRole('ROLE_INSTRUCTOR') or hasRole('ROLE_STUDENT')" class="nav-item">
                 <a class="nav-link" id="newPassword-tab" data-toggle="tab" href="#newPassword" role="tab"
                    aria-controls="newPassword" aria-selected="false">Password</a>
             </li>
@@ -156,7 +156,7 @@
                         <div class="form-group">
                             <p class="text-primary">Undergrad student target</p>
                             <p class="text-info">Grad student target</p>
-                            <label>Works:</label>
+                            <label>Courses:</label>
                             <ul>
                                 <li th:each="course : ${allCourses}">
                                     <input type="checkbox" th:field="*{courses}" th:value="${course.id}" />

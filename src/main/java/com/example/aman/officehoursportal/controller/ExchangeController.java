@@ -36,7 +36,7 @@ public class ExchangeController {
     public String showExchangeSummaryScreen(@PathVariable("oldMeetingId") int oldMeetingId, @PathVariable("newMeetingId") int newMeetingId, Model model, @AuthenticationPrincipal CustomUserDetails currentUser) {
         if (exchangeService.checkIfExchangeIsPossible(oldMeetingId, newMeetingId, currentUser.getId())) {
             model.addAttribute("oldMeeting", meetingService.getMeetingByIdWithAuthorization(oldMeetingId));
-            model.addAttribute("newAppointment", meetingService.getMeetingById(newMeetingId));
+            model.addAttribute("newMeeting", meetingService.getMeetingById(newMeetingId));
         } else {
             return "redirect:/meetings/all";
         }

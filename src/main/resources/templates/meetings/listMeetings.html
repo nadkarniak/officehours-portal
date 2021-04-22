@@ -27,7 +27,7 @@
             </tr>
             <tr th:each="meeting : ${meetings}"
                 th:classappend="${meeting.status.name() == 'CANCELED' || meeting.status.name()  == 'FINISHED' || meeting.status.name()  == 'READED' || meeting.status.name()  == 'REJECTION_REQUESTED' || meeting.status.name()  == 'REJECTED'} ? table-secondary : table-success">
-                <td><span th:text="${meeting.course.name}"> Work </span></td>
+                <td><span th:text="${meeting.course.name}"> Course </span></td>
                 <td><span th:text="${meeting.status}"> scheduled </span></td>
                 <td><span th:text="${#temporals.format(meeting.start, 'yyyy-MM-dd HH:mm')}"> 21-01-2019 15:00</span>
                 </td>
@@ -57,7 +57,7 @@
             </tfoot>
         </table>
         <div sec:authorize="hasRole('ROLE_STUDENT')" class="text-center">
-            <a class="btn btn-primary mt-2" th:href="@{/templates/meetings/new}" role="button">New meeting</a>
+            <a class="btn btn-primary mt-2" th:href="@{/meetings/new}" role="button">New meeting</a>
         </div>
 
     </div>

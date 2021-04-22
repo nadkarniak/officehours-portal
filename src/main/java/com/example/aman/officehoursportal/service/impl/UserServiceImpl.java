@@ -67,9 +67,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @PreAuthorize("#ungergradStudentId == principal.id or hasRole('ADMIN')")
-    public UndergradStudent getUndergradStudentById(int ungergradStudentId) {
-        return undergradStudentRepository.findById(ungergradStudentId)
+    @PreAuthorize("#undergradStudentId == principal.id or hasRole('ADMIN')")
+    public UndergradStudent getUndergradStudentById(int undergradStudentId) {
+        return undergradStudentRepository.findById(undergradStudentId)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
 
     }
@@ -170,18 +170,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("#userForm.userName!=''")
     public void saveNewUndergradStudent(UserForm userForm) {
         UndergradStudent undergradStudent = new UndergradStudent(userForm, passwordEncoder.encode(userForm.getPassword()), getRolesForUndergradStudents());
         undergradStudentRepository.save(undergradStudent);
     }
 
     @Override
+    @PreAuthorize("#userForm.userName!=''")
     public void saveNewGradStudent(UserForm userForm) {
         GradStudent gradStudent = new GradStudent(userForm, passwordEncoder.encode(userForm.getPassword()), getRolesForInstructor());
         gradStudentRepository.save(gradStudent);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void saveNewInstructor(UserForm userForm) {
         WorkingPlan workingPlan = WorkingPlan.generateDefaultWorkingPlan();
         Instructor instructor = new Instructor(userForm, passwordEncoder.encode(userForm.getPassword()), getRolesForInstructor(), workingPlan);

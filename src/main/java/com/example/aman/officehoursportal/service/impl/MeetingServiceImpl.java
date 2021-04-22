@@ -220,9 +220,9 @@ public class MeetingServiceImpl implements MeetingService {
     @Override
     public void updateMeetingsStatusesWithExpiredExchangeRequest() {
         meetingRepository.findExchangeRequestedWithStartBefore(LocalDateTime.now().plusDays(1))
-                .forEach(appointment -> {
-                    appointment.setStatus(MeetingStatus.SCHEDULED);
-                    updateMeeting(appointment);
+                .forEach(meeting -> {
+                    meeting.setStatus(MeetingStatus.SCHEDULED);
+                    updateMeeting(meeting);
                 });
     }
 

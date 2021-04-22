@@ -89,7 +89,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void newMeetingRejectionRequestedNotification(Meeting meeting, boolean sendEmail) {
         String title = "Meeting Rejected";
-        String message = meeting.getStudent().getFirstName() + " " + meeting.getStudent().getLastName() + "rejected an appointment. Your approval is required";
+        String message = meeting.getStudent().getFirstName() + " " + meeting.getStudent().getLastName() + "rejected a meeting. Your approval is required";
         String url = "/meetings/" + meeting.getId();
         newNotification(title, message, url, meeting.getInstructor());
         if (sendEmail && mailingEnabled) {
@@ -154,8 +154,8 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void newExchangeAcceptedNotification(ExchangeRequest exchangeRequest, boolean sendEmail) {
         String title = "Exchange request accepted";
-        String message = "Someone accepted your appointment exchange request from " + exchangeRequest.getRequested().getStart() + " to " + exchangeRequest.getRequestor().getStart();
-        String url = "/appointments/" + exchangeRequest.getRequested();
+        String message = "Someone accepted your meeting exchange request from " + exchangeRequest.getRequested().getStart() + " to " + exchangeRequest.getRequestor().getStart();
+        String url = "/meetings/" + exchangeRequest.getRequested();
         newNotification(title, message, url, exchangeRequest.getRequested().getStudent());
         if (sendEmail && mailingEnabled) {
             emailService.sendExchangeRequestAcceptedNotification(exchangeRequest);
@@ -165,8 +165,8 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void newExchangeRejectedNotification(ExchangeRequest exchangeRequest, boolean sendEmail) {
         String title = "Exchange request rejected";
-        String message = "Someone rejected your appointment exchange request from " + exchangeRequest.getRequestor().getStart() + " to " + exchangeRequest.getRequested().getStart();
-        String url = "/appointments/" + exchangeRequest.getRequestor();
+        String message = "Someone rejected your meeting exchange request from " + exchangeRequest.getRequestor().getStart() + " to " + exchangeRequest.getRequested().getStart();
+        String url = "/meetings/" + exchangeRequest.getRequestor();
         newNotification(title, message, url, exchangeRequest.getRequestor().getStudent());
         if (sendEmail && mailingEnabled) {
             emailService.sendExchangeRequestRejectedNotification(exchangeRequest);

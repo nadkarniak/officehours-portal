@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{fragments/layout :: layout (~{::body},'appointments','New appointment confirmation')}"
+      th:replace="~{fragments/layout :: layout (~{::body},'meetings','New meeting confirmation')}"
       xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <body>
@@ -11,7 +11,7 @@
             <thead>
             <tr class="text-center">
                 <td colspan="2">
-                    <h3>Your new appointment summary</h3>
+                    <h3>Your new meeting summary</h3>
                 </td>
             </tr>
             </thead>
@@ -50,7 +50,7 @@
             </tr>
             <tr class="text-center">
                 <td colspan="2">
-                    <form th:action="@{/templates/meetings/new}" method="POST">
+                    <form th:action="@{/meetings/new}" method="POST">
                         <input type="hidden" name="courseId" th:value="${course.id}">
                         <input type="hidden" name="instructorId" th:value="${instructorId}">
                         <input type="hidden" name="start" th:value="${start}">

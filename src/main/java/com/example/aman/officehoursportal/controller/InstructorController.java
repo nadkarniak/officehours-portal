@@ -23,9 +23,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-
 @Controller
 @RequestMapping("/instructors")
+
 public class InstructorController {
 
     private final UserService userService;

@@ -33,7 +33,7 @@ public class ReportController {
 
     @GetMapping("/all")
     public String showAllReports(Model model) {
-        model.addAttribute("invoices", reportService.getAllReports());
+        model.addAttribute("reports", reportService.getAllReports());
         return "reports/listReports";
     }
 
@@ -50,7 +50,7 @@ public class ReportController {
     }
 
     @GetMapping("/download/{reportId}")
-    public ResponseEntity<InputStreamResource> downloadInvoice(@PathVariable("reportId") int reportId, @AuthenticationPrincipal CustomUserDetails currentUser) {
+    public ResponseEntity<InputStreamResource> downloadReport(@PathVariable("reportId") int reportId, @AuthenticationPrincipal CustomUserDetails currentUser) {
         try {
             File invoicePdf = reportService.generatePdfForReport(reportId);
             HttpHeaders respHeaders = new HttpHeaders();

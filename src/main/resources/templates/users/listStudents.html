@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'customers','Customers')}"
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'students','Students')}"
       xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <body>
@@ -7,29 +7,29 @@
 
 <div class="row align-items-center justify-content-center" style="margin-top: 50px">
     <div>
-        <table id="customers" class="table table-striped text-center">
+        <table id="students" class="table table-striped text-center">
             <thead class="thead-dark">
             <tr>
                 <th> Name</th>
                 <th> Type </th>
                 <th> E-mail</th>
-                <th> Appointments</th>
+                <th> Meetings</th>
                 <th> Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${customers == null}">
-                <td colspan="4"> No Instructors Available</td>
+            <tr th:if="${students == null}">
+                <td colspan="4"> No Students Available</td>
             </tr>
-            <tr th:each="customer : ${customers}" th:classappend="${customer.getType()=='retail' ? 'table-primary' : 'table-info'}">
-                <td><span th:text="${customer.firstName +' ' + customer.lastName}"> Name Lastname </span></td>
-                <td><span th:text="${customer.getType() == 'undergrad'? 'undergrad':'grad'}"> Undergrad </span></td>
-                <td><span th:text="${customer.email }"> email </span></td>
-                <td><span th:text="${customer.appointments.size() }"> 3 </span></td>
-                <td><a class="btn btn-secondary" th:href="@{'/customers/' + ${customer.id}}"
+            <tr th:each="student : ${students}" th:classappend="${student.getType()=='undergrad' ? 'table-primary' : 'table-info'}">
+                <td><span th:text="${student.firstName +' ' + student.lastName}"> Name Lastname </span></td>
+                <td><span th:text="${student.getType() == 'undergrad'? 'undergrad':'grad'}"> Undergrad </span></td>
+                <td><span th:text="${student.email }"> email </span></td>
+                <td><span th:text="${student.meetings.size() }"> 3 </span></td>
+                <td><a class="btn btn-secondary" th:href="@{'/students/' + ${student.id}}"
                        role="button">Details</a>
-                    <form class="d-inline-block" th:action="@{/customers/delete}" method="POST">
-                        <input type="hidden" name="customerId" th:value="${customer.id}" />
+                    <form class="d-inline-block" th:action="@{/students/delete}" method="POST">
+                        <input type="hidden" name="studentId" th:value="${student.id}" />
                         <button type="submit" name="submit" value="value" class="btn btn-danger">Delete</button>
                     </form>
                 </td>

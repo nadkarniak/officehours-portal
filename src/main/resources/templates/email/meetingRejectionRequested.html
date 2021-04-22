@@ -5,8 +5,8 @@
 
 <body>
 <p>Hello, <span th:text="${meeting.instructor.firstName}"></span></p>
-<p>You customer claims that the following meeting didn't take place: </p>
-<p>Customer: <span th:text="${meeting.student.firstName + ' ' + meeting.student.lastName}"></span></p>
+<p>You student claims that the following meeting didn't take place: </p>
+<p>Student: <span th:text="${meeting.student.firstName + ' ' + meeting.student.lastName}"></span></p>
 <p>Start date: <span th:text="${#temporals.format(meeting.start, 'dd-MM-yyyy HH:mm')}"></span></p>
 <p>Course: <span th:text="${meeting.course.name}"></span></p>
 <p>Duration: <span th:text="${meeting.course.duration}"></span></p>
