@@ -85,9 +85,9 @@ public class StudentController {
     }
 
 
-    @GetMapping("/new/{student_type}")
+    @RequestMapping(value="/new/{student_type}", method = {RequestMethod.GET,RequestMethod.POST})
     public String showStudentRegistrationForm(@PathVariable("student_type") String studentType, Model model, @AuthenticationPrincipal CustomUserDetails currentUser) {
-        if (currentUser != null) {
+        if (currentUser.getId()==null && !(currentUser.hasRole("ROLE_ADMIN"))) {
             return "redirect:/";
         }
         if (studentType.equals("grad")) {

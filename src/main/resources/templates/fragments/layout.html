@@ -5,38 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title th:text="${pageTitle}">Page title</title>
-
-    <!-- Meeting Chat CSS -->
     <link rel="stylesheet" th:href="@{/css/vendor/chat.css}"/>
-    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <!-- Fullcalendar CSS -->
     <link rel="stylesheet" th:href="@{/css/vendor/fullcalendar.css}"/>
-    <!-- Site CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <!--DataTables CSS-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-
     <link rel="stylesheet" th:href="@{/css/vendor/bootstrap-notifications.css}"/>
-
-
-    <!--font awesome-->
     <script src="https://kit.fontawesome.com/56438f342e.js"></script>
-
-    <!--jQuery-->
     <script src="/webjars/jquery/3.3.1-2/jquery.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!--Moment-->
     <script type="text/javascript" th:src="@{/js/vendor/moment.js}"></script>
-    <!--FullCalendar-->
     <script type="text/javascript" th:src="@{/js/vendor/fullcalendar.js}"></script>
-    <!--DataTables-->
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137823705-3"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137823705-3"></script>-->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -102,10 +84,16 @@
 </div>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container-fluid">
     <th:block th:include="${content}"/>
     <div class="row align-items-center justify-content-center" style="margin-top: 50px">
-        <p>Office Hours Portal version <span th:text="${currentVersion}">1.0</span></p>
+        <p>Office Hours Portal version : <span th:text="${currentVersion}"></span></p>
+    </div>
+    <div class="row align-items-center justify-content-center" style="margin-top: 50px">
+        <p>An Open Source Project by InfinityMatrix Group for CS5610 Spring 2021</p>
+    </div>
+    <div class="row align-items-center justify-content-center" style="margin-top: 50px">
+        <p>For GitHub Repo: <a href="https://github.com/mnbatra/officehours-portal">Click Me</a></p>
     </div>
 </div>
 

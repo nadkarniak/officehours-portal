@@ -170,14 +170,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @PreAuthorize("#userForm.userName!=''")
     public void saveNewUndergradStudent(UserForm userForm) {
         UndergradStudent undergradStudent = new UndergradStudent(userForm, passwordEncoder.encode(userForm.getPassword()), getRolesForUndergradStudents());
         undergradStudentRepository.save(undergradStudent);
     }
 
     @Override
-    @PreAuthorize("#userForm.userName!=''")
     public void saveNewGradStudent(UserForm userForm) {
         GradStudent gradStudent = new GradStudent(userForm, passwordEncoder.encode(userForm.getPassword()), getRolesForInstructor());
         gradStudentRepository.save(gradStudent);
