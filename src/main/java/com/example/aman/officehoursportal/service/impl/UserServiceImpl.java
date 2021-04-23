@@ -210,6 +210,7 @@ public class UserServiceImpl implements UserService {
     public Collection<Role> getRolesForInstructor() {
         HashSet<Role> roles = new HashSet();
         roles.add(roleRepository.findByName("ROLE_INSTRUCTOR"));
+
         return roles;
     }
 

@@ -13,6 +13,7 @@ import com.example.aman.officehoursportal.validation.groups.CreateInstructor;
 import com.example.aman.officehoursportal.validation.groups.CreateUser;
 import com.example.aman.officehoursportal.validation.groups.UpdateInstructor;
 import com.example.aman.officehoursportal.validation.groups.UpdateUser;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,6 +91,7 @@ public class InstructorController {
     }
 
     @PostMapping("/new")
+    @PreAuthorize("hasRole('ADMIN')")
     public String processInstructorRegistrationForm(@Validated({CreateUser.class, CreateInstructor.class}) @ModelAttribute("user") UserForm userForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", bindingResult);

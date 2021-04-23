@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `meetings` (
     CONSTRAINT `meetings_users_canceler` FOREIGN KEY (`id_canceler`) REFERENCES `users` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-    CONSTRAINT `meetings_users_customer` FOREIGN KEY (`id_student`) REFERENCES `users` (`id`)
+    CONSTRAINT `meetings_users_students` FOREIGN KEY (`id_student`) REFERENCES `users` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
     CONSTRAINT `meetings_courses` FOREIGN KEY (`id_course`) REFERENCES `courses` (`id`)

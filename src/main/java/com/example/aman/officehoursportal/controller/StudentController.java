@@ -85,7 +85,7 @@ public class StudentController {
     }
 
 
-    @RequestMapping(value="/new/{student_type}", method = {RequestMethod.GET,RequestMethod.POST})
+    @GetMapping("/new/{student_type}")
     public String showStudentRegistrationForm(@PathVariable("student_type") String studentType, Model model, @AuthenticationPrincipal CustomUserDetails currentUser) {
         if (currentUser!=null && !(currentUser.hasRole("ROLE_ADMIN"))) {
             return "redirect:/";
@@ -112,7 +112,7 @@ public class StudentController {
         }
         userService.saveNewUndergradStudent(userForm);
         model.addAttribute("createdUserName", userForm.getUserName());
-        return "users/successful";
+        return "users/login";
     }
 
     @PostMapping("/new/grad")
@@ -123,7 +123,7 @@ public class StudentController {
         }
         userService.saveNewGradStudent(userForm);
         model.addAttribute("createdUserName", userForm.getUserName());
-        return "users/successful";
+        return "users/login";
     }
 
 

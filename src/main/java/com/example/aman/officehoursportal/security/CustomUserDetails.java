@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
 
-    private String userName;
-    private String password;
-    private Collection<? extends GrantedAuthority> authorities;
-    private String email;
-    private Integer id;
-    private String firstName;
-    private String lastName;
+    private final String userName;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
+    private final String email;
+    private final Integer id;
+    private final String firstName;
+    private final String lastName;
 
     public CustomUserDetails(Integer id, String firstName, String lastName, String userName, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;

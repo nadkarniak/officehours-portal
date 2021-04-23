@@ -103,13 +103,10 @@
             url: '/api/user/notifications',
             type: 'get',
             success: function(data){
-                var element = document.getElementById("notifications-count");
-                if(data>0){
+                let element = document.getElementById("notifications-count");
+                if(data>0 && data!=null){
                     element.setAttribute("data-count",data);
                     element.className = "fas fa-bell notification-icon";
-                } else{
-                    element.setAttribute("data-count",null);
-                    element.className = "fas fa-bell";
                 }
             },
             complete:function(data){
