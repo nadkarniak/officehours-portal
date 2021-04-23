@@ -41,10 +41,10 @@
     <div class="col-lg-3 text-center"></div>
     <div class="col-lg-6">
         <div class="card">
-            <div class="card-header text-center">
-                <th:block th:if="${account_type =='student_grad'}">Register New Grad Student Account</th:block>
-                <th:block th:if="${account_type =='student_undergrad'}">Register New Undergrad Student Account</th:block>
-                <th:block th:if="${account_type =='instructor'}">Register New Instructor Account</th:block>
+            <div class="card-header text-center bg-secondary text-white">
+                <th:block th:if="${account_type =='student_grad'}">Grad Student Account Form</th:block>
+                <th:block th:if="${account_type =='student_undergrad'}">Undergrad Student Account Form</th:block>
+                <th:block th:if="${account_type =='instructor'}">Instructor Account Form</th:block>
             </div>
 
             <form action="createUserForm.html" th:action="@{${registerAction}}" th:object="${user}" method="POST" style="">
@@ -52,8 +52,7 @@
                 <div th:if="${registrationError != null}" class="alert alert-danger">
                     <p th:text="${registrationError}"></p>
                 </div>
-
-                <div class="form-group container-fluid">
+                <div class="form-group container-fluid mt-4">
                     <label for="userName">Username</label>
 
                     <input type="text" class="form-control" th:classappend="${#fields.hasErrors('userName') ? 'is-invalid' :''}" th:field="*{userName}" placeholder="amanbatra">

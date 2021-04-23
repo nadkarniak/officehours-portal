@@ -25,7 +25,7 @@
 <body>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark container-fluid">
         <h3 class="site-title">
-            <a class="navbar-brand" href="#">Office Hours Portal</a>
+            <a class="navbar-brand" href="./">Office Hours Portal</a>
         </h3>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -58,12 +58,12 @@
             </form>
         </div>
     </nav>
-<div class="row" style="margin-top: 50px" ;>
+<div class="row" style="margin-top: 50px">
     <div class="col-lg-4 text-center"></div>
     <div class="col-lg-4 text-center">
         <div class="card">
-            <div class="card-header">
-                Sign in
+            <div class="card-header bg-dark text-white">
+                Login to OH Portal
             </div>
             <div class="card-body">
                 <form id="login-form" th:action="@{/perform_login}" method='POST' class="form-horizontal">
