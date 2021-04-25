@@ -20,7 +20,7 @@ import java.util.Date;
 @Component
 public class JwtTokenServiceImpl implements JwtTokenService {
 
-    private String jwtSecret;
+    private final String jwtSecret;
 
     public JwtTokenServiceImpl(@Value(value = "${app.jwtSecret}") String jwtSecret) {
         this.jwtSecret = jwtSecret;

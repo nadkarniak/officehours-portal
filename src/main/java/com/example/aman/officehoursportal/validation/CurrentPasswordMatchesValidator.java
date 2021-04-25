@@ -26,9 +26,7 @@ public class CurrentPasswordMatchesValidator implements ConstraintValidator<Curr
         ChangePasswordForm form = (ChangePasswordForm) obj;
         boolean isValid = false;
         User user = userService.getUserById(form.getId());
-        if (passwordEncoder.matches(form.getCurrentPassword(), user.getPassword())) {
-            isValid = true;
-        }
+        if (passwordEncoder.matches(form.getCurrentPassword(), user.getPassword())) isValid = true;
         if (!isValid) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())

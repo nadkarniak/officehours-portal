@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-// statuses: issued,paid
-
 @Entity
 @Table(name = "reports")
 public class Report extends BaseEntity {

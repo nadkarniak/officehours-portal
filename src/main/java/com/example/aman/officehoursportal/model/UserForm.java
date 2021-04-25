@@ -90,12 +90,12 @@ public class UserForm {
     }
 
     public UserForm(Instructor instructor) {
-        this((User) instructor);
+        this((User)instructor);
         this.setCourses(instructor.getCourses());
     }
 
     public UserForm(UndergradStudent undergradStudent) {
-        this((User) undergradStudent);
+        this((User)undergradStudent);
     }
 
     public UserForm(GradStudent gradStudent) {

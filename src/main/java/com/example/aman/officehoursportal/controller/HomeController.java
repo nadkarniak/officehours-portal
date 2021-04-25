@@ -1,5 +1,9 @@
 package com.example.aman.officehoursportal.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import com.example.aman.officehoursportal.service.NotificationService;
+
 import com.example.aman.officehoursportal.security.CustomUserDetails;
 import com.example.aman.officehoursportal.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,11 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    private final UserService userService;
-
-    public HomeController(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String showHome(Model model, @AuthenticationPrincipal CustomUserDetails currentUser) {

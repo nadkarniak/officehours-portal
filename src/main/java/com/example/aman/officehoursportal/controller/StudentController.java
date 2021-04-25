@@ -1,5 +1,5 @@
 package com.example.aman.officehoursportal.controller;
-
+import com.example.aman.officehoursportal.entity.user.User;
 import com.example.aman.officehoursportal.entity.user.student.Student;
 import com.example.aman.officehoursportal.model.ChangePasswordForm;
 import com.example.aman.officehoursportal.model.UserForm;
@@ -10,6 +10,7 @@ import com.example.aman.officehoursportal.validation.groups.CreateGraduateStuden
 import com.example.aman.officehoursportal.validation.groups.CreateUser;
 import com.example.aman.officehoursportal.validation.groups.UpdateGraduateStudent;
 import com.example.aman.officehoursportal.validation.groups.UpdateUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +24,12 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/students")
 public class StudentController {
-    private final UserService userService;
-    private final MeetingService meetingService;
 
-    public StudentController(UserService userService, MeetingService meetingService) {
-        this.userService = userService;
-        this.meetingService = meetingService;
-    }
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private MeetingService meetingService;
 
     @GetMapping("/all")
     public String showAllStudents(Model model) {
@@ -67,7 +67,7 @@ public class StudentController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", bindingResult);
             redirectAttributes.addFlashAttribute("user", user);
-            return "redirect:/students/" + user.getId();
+            return "redirect:/students/"+user.getId();
         }
         userService.updateGradStudentProfile(user);
         return "redirect:/students/" + user.getId();
@@ -87,9 +87,10 @@ public class StudentController {
 
     @GetMapping("/new/{student_type}")
     public String showStudentRegistrationForm(@PathVariable("student_type") String studentType, Model model, @AuthenticationPrincipal CustomUserDetails currentUser) {
-        if (currentUser!=null && !(currentUser.hasRole("ROLE_ADMIN"))) {
+        if (currentUser!=null) {
             return "redirect:/";
         }
+        // && !(currentUser.hasRole("ROLE_ADMIN"))
         if (studentType.equals("grad")) {
             model.addAttribute("account_type", "student_grad");
             model.addAttribute("action", "/students/new/grad");

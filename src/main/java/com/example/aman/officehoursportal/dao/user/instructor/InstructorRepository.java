@@ -16,4 +16,5 @@ public interface InstructorRepository extends CommonUserRepository<Instructor> {
 
     @Query("select distinct p from Instructor p inner join p.courses w where w.targetStudent = 'grad'")
     List<Instructor> findAllWithGradCourses();
+
 }

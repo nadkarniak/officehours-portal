@@ -93,7 +93,7 @@
         <p>An Open Source Project &#10084;&#65039; by the InfinityMatrix Group for CS5610 Spring 2021</p>
     </div>
     <div class="row align-items-center justify-content-center" style="margin-top: 50px">
-        <p>For GitHub Repo: <a href="https://github.com/mnbatra/officehours-portal">Click Me</a>. Total Time Invested: 83 hours </p>
+        <p>For GitHub Repo: <a href="https://github.com/mnbatra/officehours-portal">Click Me</a>. Total Time Invested: 126 hours </p>
     </div>
 </div>
 
@@ -107,6 +107,10 @@
                 if(data>0 && data!=null){
                     element.setAttribute("data-count",data);
                     element.className = "fas fa-bell notification-icon";
+                }
+                else{
+                    element.setAttribute("data-count",0);
+                    element.className = "fas fa-bell";
                 }
             },
             complete:function(data){

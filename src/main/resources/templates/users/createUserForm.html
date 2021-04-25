@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'','Registration form')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'user','Registration form')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <body>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark container-fluid">
@@ -47,15 +48,16 @@
                 <th:block th:if="${account_type =='instructor'}">Instructor Account Form</th:block>
             </div>
 
-            <form action="createUserForm.html" th:action="@{${registerAction}}" th:object="${user}" method="POST" style="">
-
+            <form th:action="@{${registerAction}}" th:object="${user}" method="POST">
                 <div th:if="${registrationError != null}" class="alert alert-danger">
                     <p th:text="${registrationError}"></p>
                 </div>
+                <input type="hidden" th:field="*{id}" th:value="${user.id}">
+
                 <div class="form-group container-fluid mt-4">
                     <label for="userName">Username</label>
 
-                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('userName') ? 'is-invalid' :''}" th:field="*{userName}" placeholder="amanbatra">
+                    <input id="userName" type="text" class="form-control" th:classappend="${#fields.hasErrors('userName') ? 'is-invalid' :''}" th:field="*{userName}" placeholder="amanbatra">
                     <div th:if="${#fields.hasErrors('userName')}" class="invalid-feedback">
                         <p th:errors="*{userName}"></p>
                     </div>
@@ -104,8 +106,7 @@
                 </th:block>
 
                 <div class="form-group container-fluid">
-                    <label th:if="${account_type =='student_grad'}" for="firstName">Contact Person First Name</label>
-                    <label th:if="${account_type =='student_undergrad' or account_type =='instructor'}" for="firstName">First name</label>
+                    <label for="firstName">First Name</label>
                     <input type="text" class="form-control" th:classappend="${#fields.hasErrors('firstName') ? 'is-invalid' :''}" th:field="*{firstName}"  placeholder="Aman">
                     <div th:if="${#fields.hasErrors('firstName')}" class="invalid-feedback">
                         <p th:errors="*{firstName}"></p>
@@ -114,8 +115,7 @@
                 </div>
 
                 <div class="form-group container-fluid">
-                    <label th:if="${account_type =='student_grad'}" for="lastName">Contact Person Last Name</label>
-                    <label th:if="${account_type =='student_undergrad' or account_type =='instructor'}" for="lastName">Last name</label>
+                    <label for="lastName">Last name</label>
                     <input type="text" class="form-control" th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' :''}" th:field="*{lastName}" placeholder="Batra">
                     <div th:if="${#fields.hasErrors('lastName')}" class="invalid-feedback">
                         <p th:errors="*{lastName}"></p>
@@ -132,7 +132,6 @@
 
                 <div class="form-group container-fluid">
                     <label for="mobile">Mobile</label>
-
                     <input type="text" class="form-control" th:classappend="${#fields.hasErrors('mobile') ? 'is-invalid' :''}" th:field="*{mobile}" placeholder="8571234567">
                     <div th:if="${#fields.hasErrors('mobile')}" class="invalid-feedback">
                         <p th:errors="*{mobile}"></p>
@@ -142,7 +141,6 @@
 
                 <div class="form-group container-fluid">
                     <label for="street">Street Address</label>
-
                     <input type="text" class="form-control" th:classappend="${#fields.hasErrors('street') ? 'is-invalid' :''}" th:field="*{street}" placeholder="334 Huntington Ave">
                     <div th:if="${#fields.hasErrors('street')}" class="invalid-feedback">
                         <p th:errors="*{street}"></p>
@@ -175,7 +173,7 @@
                             <li th:each="course : ${allCourses}">
                                 <input type="checkbox" th:field="*{courses}" th:value="${course.id}" />
                                 <label th:for="${#ids.prev('courses')}"
-                                       th:text="${course.name}" th:classappend="${course.targetStudent=='undergrad'}? text-primary : text-info">CS3200</label>
+                                       th:text="${course.name}" th:classappend="${course.targetStudent=='undergrad'} ? 'text-primary' : 'text-info'">CS3200</label>
                             </li>
                         </ul>
                     </div>
@@ -192,5 +190,4 @@
     </div>
 </div>
 <div class="col-lg-3 text-center"></div>
-</body>
-</html>
+</body></html>

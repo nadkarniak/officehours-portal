@@ -1,14 +1,15 @@
 package com.example.aman.officehoursportal.service.impl;
 
+
 import com.example.aman.officehoursportal.dao.RoleRepository;
 import com.example.aman.officehoursportal.dao.user.UserRepository;
-import com.example.aman.officehoursportal.dao.user.student.StudentRepository;
 import com.example.aman.officehoursportal.dao.user.instructor.InstructorRepository;
 import com.example.aman.officehoursportal.dao.user.student.GradStudentRepository;
+import com.example.aman.officehoursportal.dao.user.student.StudentRepository;
 import com.example.aman.officehoursportal.dao.user.student.UndergradStudentRepository;
+import com.example.aman.officehoursportal.entity.Course;
 import com.example.aman.officehoursportal.entity.WorkingPlan;
 import com.example.aman.officehoursportal.entity.user.Role;
-import com.example.aman.officehoursportal.entity.Course;
 import com.example.aman.officehoursportal.entity.user.User;
 import com.example.aman.officehoursportal.entity.user.instructor.Instructor;
 import com.example.aman.officehoursportal.entity.user.student.GradStudent;
@@ -27,8 +28,8 @@ import java.util.HashSet;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
 
+public class UserServiceImpl implements UserService {
     private final InstructorRepository instructorRepository;
     private final StudentRepository studentRepository;
     private final GradStudentRepository gradStudentRepository;
@@ -36,7 +37,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-
     public UserServiceImpl(InstructorRepository instructorRepository, StudentRepository studentRepository, GradStudentRepository gradStudentRepository, UndergradStudentRepository undergradStudentRepository, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.instructorRepository = instructorRepository;
         this.studentRepository = studentRepository;
@@ -46,6 +46,10 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
+    @Override
+    public boolean userExists(String userName) {
+        return userRepository.findByUserName(userName).isPresent();
+    }
 
     @Override
     @PreAuthorize("#userId == principal.id")
@@ -53,7 +57,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
-
     @Override
     @PreAuthorize("#studentId == principal.id or hasRole('ADMIN')")
     public Student getStudentById(int studentId) {
@@ -171,13 +174,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveNewUndergradStudent(UserForm userForm) {
-        UndergradStudent undergradStudent = new UndergradStudent(userForm, passwordEncoder.encode(userForm.getPassword()), getRolesForUndergradStudents());
+        UndergradStudent undergradStudent = new UndergradStudent(userForm, passwordEncoder.encode(userForm.getPassword()), getRolesForUndergradStudent());
         undergradStudentRepository.save(undergradStudent);
     }
 
     @Override
     public void saveNewGradStudent(UserForm userForm) {
-        GradStudent gradStudent = new GradStudent(userForm, passwordEncoder.encode(userForm.getPassword()), getRolesForInstructor());
+        GradStudent gradStudent = new GradStudent(userForm, passwordEncoder.encode(userForm.getPassword()), getRoleForGradStudents());
         gradStudentRepository.save(gradStudent);
     }
 
@@ -190,8 +193,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<Role> getRolesForUndergradStudents() {
-        HashSet<Role> roles = new HashSet();
+    public Collection<Role> getRolesForUndergradStudent() {
+        HashSet<Role> roles = new HashSet<Role>();
         roles.add(roleRepository.findByName("ROLE_STUDENT_UNDERGRAD"));
         roles.add(roleRepository.findByName("ROLE_STUDENT"));
         return roles;
@@ -200,7 +203,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<Role> getRoleForGradStudents() {
-        HashSet<Role> roles = new HashSet();
+        HashSet<Role> roles = new HashSet<Role>();
         roles.add(roleRepository.findByName("ROLE_STUDENT_GRAD"));
         roles.add(roleRepository.findByName("ROLE_STUDENT"));
         return roles;
@@ -208,7 +211,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<Role> getRolesForInstructor() {
-        HashSet<Role> roles = new HashSet();
+        HashSet<Role> roles = new HashSet<Role>();
         roles.add(roleRepository.findByName("ROLE_INSTRUCTOR"));
 
         return roles;

@@ -37,7 +37,7 @@
                     <form th:if="${report.status=='issued'}" class="d-inline-block"
                           th:action="@{'/reports/paid/' + ${report.id}}" method="POST">
                         <input type="hidden" name="reportId" th:value="${report.id}"/>
-                        <button type="submit" name="submit" value="value" class="btn btn-success">Mark as paid</button>
+                        <button type="submit" name="submit" value="value" class="btn btn-success">Mark as Reviewed</button>
                     </form>
                 </td>
             </tr>
