@@ -122,7 +122,7 @@ public class InstructorController {
     }
 
     @PostMapping("/availability/breakes/add")
-    public String processInstructorAddBreak(@ModelAttribute("breakModel") TimePeroid breakToAdd, @RequestParam("planId") int planId, @RequestParam("dayOfWeek") String dayOfWeek) {
+    public String processInstructorAddBreak(@ModelAttribute("plants") TimePeroid breakToAdd, @RequestParam("planId") int planId, @RequestParam("dayOfWeek") String dayOfWeek) {
         workingPlanService.addBreakToWorkingPlan(breakToAdd, planId, dayOfWeek);
         return "redirect:/instructors/availability";
     }

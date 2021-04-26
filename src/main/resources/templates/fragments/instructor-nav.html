@@ -11,7 +11,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/instructors/availability}"
-                   th:classappend="${activeLink} == 'availability' ? 'active':''">Availability</a>
+                   th:classappend="${activeLink} == 'availability' ? 'active':''">OH Schedule</a>
             </li>
             <li class="nav-item" th:classappend="${activeLink} == 'account' ? 'active':''">
                 <a class="nav-link" th:href="@{'/instructors/' + ${#authentication.principal.id}}">My account</a>

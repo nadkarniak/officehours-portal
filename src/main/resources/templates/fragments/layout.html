@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:text="${pageTitle}">Page title</title>
+    <title th:text="${pageTitle}">Office Hours Portal</title>
     <link rel="stylesheet" th:href="@{/css/vendor/chat.css}"/>
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" th:href="@{/css/vendor/fullcalendar.css}"/>
@@ -68,13 +68,13 @@
                         </a>
                     </li>
                     <li>
-                        <p class="navbar-nav ml-auto navbar-text"> Logged as:
-                            <span sec:authentication="name">username</span> | </p>
+                        <p class="navbar-nav ml-auto navbar-text"> Logged As:
+                            <span sec:authentication="name" class="text-danger">Username</span> | </p>
                     </li>
                     <li>
                         <form th:action="@{/perform_logout}" id="logout" method="POST">
-                            <a class="nav-link" href="#"
-                               onclick="document.getElementById('logout').submit(); return false;">Log out</a>
+                            <a class="nav-link text-white" href="#"
+                               onclick="document.getElementById('logout').submit(); return false;">Log Out</a>
                         </form>
                     </li>
                 </ul>
