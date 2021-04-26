@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
         return studentRepository.getOne(studentId);
     }
 
+
     @Override
     public Instructor getInstructorById(int instructorId) {
         return instructorRepository.findById(instructorId)
@@ -91,7 +92,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Student> getAllStudents() {
+    public List<Student> getAllStudents(String keyword) {
+        if (keyword != null){
+            return studentRepository.search(keyword);
+        }
         return studentRepository.findAll();
     }
 

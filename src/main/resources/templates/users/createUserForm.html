@@ -86,7 +86,7 @@
                     <div class="form-group container-fluid">
                         <label for="univName">University Name</label>
                         <input type="text" class="form-control" th:classappend="${#fields.hasErrors('univName') ? 'is-invalid' :''}" th:field="*{univName}"
-                               placeholder="University name">
+                               placeholder="University name" id="univName">
                         <div th:if="${#fields.hasErrors('univName')}" class="invalid-feedback">
                             <p th:errors="*{univName}"></p>
                         </div>

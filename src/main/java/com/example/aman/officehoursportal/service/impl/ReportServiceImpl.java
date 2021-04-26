@@ -105,7 +105,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     @Override
     public void issueReportsForConfirmedMeetings() {
-        List<Student> students = userService.getAllStudents();
+        List<Student> students = userService.getAllStudents("");
         for (Student student : students) {
             List<Meeting> meetingsToIssueReport = meetingService.getConfirmedMeetingByStudentId(student.getId());
             if (!meetingsToIssueReport.isEmpty()) {

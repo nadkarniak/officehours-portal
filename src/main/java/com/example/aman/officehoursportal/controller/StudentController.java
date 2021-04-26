@@ -11,6 +11,7 @@ import com.example.aman.officehoursportal.validation.groups.CreateUser;
 import com.example.aman.officehoursportal.validation.groups.UpdateGraduateStudent;
 import com.example.aman.officehoursportal.validation.groups.UpdateUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/students")
@@ -31,9 +33,12 @@ public class StudentController {
     @Autowired
     private MeetingService meetingService;
 
-    @GetMapping("/all")
-    public String showAllStudents(Model model) {
-        model.addAttribute("students", userService.getAllStudents());
+    @GetMapping("/")
+    public String showAllStudents(Model model, @Param("keyword") String keyword) {
+        List<Student> listStudents = userService.getAllStudents(keyword);
+        model.addAttribute("listStudents",listStudents);
+        model.addAttribute("keyword",keyword);
+//        model.addAttribute("students", userService.getAllStudents(""));
         return "users/listStudents";
     }
 
@@ -87,10 +92,9 @@ public class StudentController {
 
     @GetMapping("/new/{student_type}")
     public String showStudentRegistrationForm(@PathVariable("student_type") String studentType, Model model, @AuthenticationPrincipal CustomUserDetails currentUser) {
-        if (currentUser!=null) {
+        if (currentUser!=null && !currentUser.hasRole("ROLE_ADMIN")) {
             return "redirect:/";
         }
-        // && !(currentUser.hasRole("ROLE_ADMIN"))
         if (studentType.equals("grad")) {
             model.addAttribute("account_type", "student_grad");
             model.addAttribute("action", "/students/new/grad");
@@ -142,7 +146,7 @@ public class StudentController {
     @PostMapping("/delete")
     public String processDeleteStudentRequest(@RequestParam("studentId") int studentId) {
         userService.deleteUserById(studentId);
-        return "redirect:/students/all";
+        return "redirect:/students/";
     }
 
     public Model populateModel(Model model, UserForm user, String account_type, String action, String error) {

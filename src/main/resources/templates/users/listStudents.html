@@ -7,24 +7,36 @@
 
 <div class="row align-items-center justify-content-center" style="margin-top: 50px">
     <div>
-        <table id="students" class="table table-striped text-center">
+        <form class="justify-content-center" th:action="@{/students/}">
+        StudentSearch API (Name,Email,Phone,Username,Mobile): <input type="text" name="keyword" id="keyword" size="50" placeholder="[Name,Email,Phone,Username,Mobile]" th:value="${keyword}" required />
+        &nbsp;
+        <input type="submit" class="btn btn-primary" value="Search" />
+        &nbsp;
+        <input type="button" value="Clear" id="btnClear" class="btn btn-danger" onclick="clearSearch()" />
+        </form>
+        <br>
+        <table id="students" class="table table-striped text-center sortable">
             <thead class="thead-dark">
             <tr>
                 <th> Name</th>
+                <th> Username </th>
                 <th> Type </th>
                 <th> E-mail</th>
+                <th> Mobile </th>
                 <th> Meetings</th>
                 <th> Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${students == null}">
+            <tr th:if="${listStudents == null}">
                 <td colspan="4"> No Students Available</td>
             </tr>
-            <tr th:each="student : ${students}" th:classappend="${student.getType()=='undergrad' ? 'table-primary' : 'table-info'}">
+            <tr th:each="student : ${listStudents}" th:classappend="${student.getType()=='undergrad' ? 'table-primary' : 'table-info'}">
                 <td><span th:text="${student.firstName +' ' + student.lastName}"> Name Lastname </span></td>
+                <td><span th:text="${student.userName}"> Username </span></td>
                 <td><span th:text="${student.getType() == 'undergrad'? 'undergrad':'grad'}"> Undergrad </span></td>
-                <td><span th:text="${student.email }"> email </span></td>
+                <td><span th:text="${student.email }"> E-mail </span></td>
+                <td><span th:text="${student.mobile }"> Mobile </span></td>
                 <td><span th:text="${student.meetings.size() }"> 3 </span></td>
                 <td><a class="btn btn-secondary" th:href="@{'/students/' + ${student.id}}"
                        role="button">Details</a>
@@ -40,11 +52,10 @@
 
 </div>
 <div class="row align-items-center justify-content-center" style="margin-top: 50px">
-    <a class="btn btn-primary" th:href="@{students/new/undergrad}" role="button">New Undergrad Student</a>
+    <a class="btn btn-primary text-white" value="addUndergrad" onclick="addUndergrad()" role="button">New Undergrad Student</a>
 </div>
 <div class="row align-items-center justify-content-center" style="margin-top: 50px">
-    <a class="btn btn-primary" th:href="@{students/new/grad}" role="button">New Grad Student</a>
+    <a class="btn btn-primary text-white" value="addGrad" onclick="addGrad()" role="button">New Grad Student</a>
 </div>
 </body>
-
 </html>

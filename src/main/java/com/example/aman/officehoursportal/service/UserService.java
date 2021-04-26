@@ -42,7 +42,7 @@ public interface UserService {
      * Students
      * */
     Student getStudentById(int studentId);
-    List<Student> getAllStudents();
+    List<Student> getAllStudents(String keyword);
     /*
      * UndergradStudent
      * */
