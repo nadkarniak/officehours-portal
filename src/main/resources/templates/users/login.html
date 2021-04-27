@@ -20,7 +20,7 @@
 <body>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark container-fluid">
         <h3 class="site-title">
-            <a class="navbar-brand" href="./"><img src="https://i.ibb.co/Lh3WBcP/Logo.png" style="height:50px; width:60px;">Office Hours Portal</a>
+            <a class="navbar-brand" href="./"><img src="https://i.ibb.co/Lh3WBcP/Logo.png" alt="Office Hours Portal"  style="height:50px; width:60px;">Office Hours Portal</a>
         </h3>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -54,10 +54,22 @@
         </div>
     </nav>
 <div class="row" style="margin-top: 50px">
-    <div class="col-lg-4 text-center"></div>
     <div class="col-lg-4 text-center">
-        <div class="card">
-            <div class="card-header bg-dark text-white">
+        <div class="card" style="height: 25em">
+            <div class="card-header bg-success text-white">
+                About Us
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">OH Portal Project</h5>
+                <p class="card-text justify-content-center">Office hours need to be structured really well, in order to get the most benefits for students as well as the instructors.
+                    This is a common problem in many universities, there is no standard platform or proper structure for conducting Office Hours. This tool is our initiative to get the best out of OH, We offer a slot booking feature & performance reports for every OH session, to help students succeed.</p>
+                <a href="https://github.com/mnbatra/officehours-portal/tree/production" class="btn btn-primary">GitHub</a>
+            </div>
+         </div>
+        </div>
+<div class="col-lg-4 text-center">
+        <div class="card" style="height: 25em">
+            <div class="card-header bg-dark text-white" >
                 Login to OH Portal
             </div>
             <div class="card-body">
@@ -91,7 +103,14 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 text-center"></div>
+    <div class="col-lg-4 text-center">
+                <div class="card" style="height: 25em">
+                    <div class="card-header bg-info text-white">
+                        Supported Universities
+                    </div>
+                            <iframe style="height: 100%; width: 100%;" scrolling="no" frameborder="0" wi src="http://ohuapi.herokuapp.com/universities"></iframe>
+            </div>
+</div>
 </div>
 </body>
 </html>
