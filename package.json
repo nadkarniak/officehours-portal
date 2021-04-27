@@ -31,7 +31,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://ohuapi.herokuapp.com/universities",
+  "proxy": "https://localhost:3000",
   "eslintConfig": {
     "extends": [
       "react-app",
