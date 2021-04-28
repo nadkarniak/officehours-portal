@@ -9,7 +9,7 @@ const UniversityRow = (
     return (
         <tr className= "row-css">
             <td onClick={()=> window.open(university.web_pages, "_blank")}
-                className="d-none d-sm-table-cell">
+                className="d-none">
                 <i className="fa fa-file"></i>
                 {name}
             </td>
