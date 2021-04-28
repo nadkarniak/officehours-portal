@@ -8,8 +8,7 @@ const UniversityRow = (
     }) => {
     return (
         <tr className= "row-css">
-            <td onClick={()=> window.open(university.web_pages, "_blank")}
-                className="d-none">
+            <td onClick={()=> window.open(university.web_pages, "_blank")}>
                 <i className="fa fa-file"></i>
                 {name}
             </td>
